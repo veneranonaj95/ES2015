@@ -1,61 +1,67 @@
-// ES5 Function that takes a variable number of arguments//
-function filterOutOdds() {
-    var nums = Array.prototype.slice.call(arguments);
-    return nums.filter(function(num) {
-        return num % 2 === 0
-    });
-}
-//ES2015 Function//
-const filterOutOdds = (...args) => args.filter(v => v % 2 === 0)
-
-// findMin//
-const findMin = (...args) => Math.min(...args)
-findMin(1, 4, 12, -3)
-findMin(1, -1)
-findMin(3, 1)
-
-//mergeObjects//
-constmergeObjects = (obj1, obj2) => ({...obj1, ...obj2})
-mergeObjects({a:1, b:2}, {c:3, d:4})
-
-//doubleAndReturnArgs//
-const doubleAndReturnArgs = (arr, ...args) => [...arr, ...args.map(v => v * 2)]
-doubleAndReturnArgs([1, 2, 3], 4, 4)
-doubleAndReturnArgs([2], 10, 4)
-
-//Slice and Dice//
-/** remove a random element in the items and return a new array without that item. */
-const removerandom = items => {
-    let idx = Math.floor(Math.random() * items.length);
-    return [...items.slice(0,idx), ...items.slice(idx + 1)];
+//Same keys and values//
+function createInstructor(firstName, lastName) {
+    return {
+        firstName: firstName,
+        lastName: lastName
+    }
 }
 
-/** Return a new array with every item in array1 and array2. */ 
-const extend = (array1, array2) => {
-    return [...array1, array2];
+//Same keys and values ES2015//
+function createinstructor(firstName, lastName) {
+    return {
+        firstName,
+        lastName
+    }
 }
 
-/** Return a new object with all the keys and the values from obj and a new key/value pair */
-const addKeyVal = (obj, key, val) => {
-    let newObj = {...obj}
-    newObj[key] = val;
-    return newObj;
+//Computed Property Names //
+var favoriteNumber = 42;
+var instructor = {
+    firstName: "Colt"
+}
+instructor[favoriteNumber] = "That is my favorite!"
+
+//Computed Property Names ES2015//
+let favoriteNumber = 42;
+const instructor = {
+    firstName: "Colt",
+    [favoriteNumber]: "That is my favorite!"
 }
 
-/** Return a new object with a key removed */
-const removeKey = (obj, key) => {
-    let newObj = {...obj}
-    delete newObj[key]
-    return newObj;
+//Object Methods//
+var instructor = {
+    firstName: "Colt",
+    sayHi: function() {
+        return "Hi!";
+    },
+    sayBye: function(){
+        return this.firstName + "says bye!";
+    }
 }
 
-/** Combine two objects and return a new object */
-const combine = (obj1, obj2) => {
-    return { ...obj1, ...obj2};
+//Object Methods ES2015//
+const instructor = {
+    firstName: "Colt",
+    sayHi(){
+        return "Hi!";
+    },
+    sayBye(){
+        return this.firstName + "says bye!";
+    }
 }
-/** Return a new object with a modified key and value */
-const update = (obj, key, val) => {
-    let newObj = {...obj}
-    newObj[key] = val;
-    return newObj;
+
+//createAnimal function//
+const d = createAnimal("dog", "bark", "Woooof!")
+d.bark()
+
+const s = createAnimal("sheep", "bleet", "BAAAAaaaa")
+s.bleet()
+
+function createAnimal(species, verb, noise) {
+    return {
+        species,
+        [verb](){
+            return noise;
+        }
+    }
 }
